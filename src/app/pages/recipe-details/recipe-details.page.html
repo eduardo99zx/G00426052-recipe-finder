@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Recipe Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" *ngIf="recipe">
+  <h1>{{ recipe.title }}</h1>
+
+  <img
+    [src]="recipe.image"
+    [alt]="recipe.title"
+    style="max-width: 100%; border-radius: 8px;"
+  />
+
+  <p>
+    <strong>Ready in:</strong> {{ recipe.readyInMinutes }} min
+    &nbsp;&nbsp;
+    <strong>Servings:</strong> {{ recipe.servings }}
+    &nbsp;&nbsp;
+    <strong>ID:</strong> {{ recipe.id }}
+  </p>
+
+  <!-- IMPORTANT (PDF): button text -->
+  <ion-button (click)="toggleFavourite()">
+    {{ isFavourite ? 'Remove From Favourites' : 'Add to Favourites' }}
+  </ion-button>
+
+  <h2>Ingredients</h2>
+  <ion-list>
+    <ion-item *ngFor="let ing of getIngredientsList()">
+      <ion-text>
+        <!-- The visible part that proves Metric/US switching -->
+        <strong>{{ ing.amount }} {{ ing.unit }}</strong>
+        &nbsp;—&nbsp;{{ ing.name }}
+      </ion-text>
+    </ion-item>
+
+    <ion-item *ngIf="getIngredientsList().length === 0">
+      <ion-text>No ingredients available.</ion-text>
+    </ion-item>
+  </ion-list>
+
+  <h2>Instructions</h2>
+  <ion-list>
+    <ion-item *ngFor="let s of getSteps()">
+      <ion-text>
+        <strong>{{ s.number }}.</strong> {{ s.step }}
+      </ion-text>
+    </ion-item>
+
+    <ion-item *ngIf="getSteps().length === 0">
+      <ion-text>No instructions available.</ion-text>
+    </ion-item>
+  </ion-list>
+
+  <h2 *ngIf="recipe.summary">Summary</h2>
+  <div *ngIf="recipe.summary" [innerHTML]="recipe.summary"></div>
+</ion-content>

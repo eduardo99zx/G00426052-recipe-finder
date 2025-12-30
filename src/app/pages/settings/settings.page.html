@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-radio-group
+      [value]="measurement"
+      (ionChange)="onMeasurementChange($event.detail.value)"
+    >
+      <ion-item>
+        <ion-label>Metric</ion-label>
+        <ion-radio slot="end" value="metric"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>US</ion-label>
+        <ion-radio slot="end" value="us"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+</ion-content>
