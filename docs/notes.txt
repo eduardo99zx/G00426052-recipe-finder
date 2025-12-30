@@ -1,3 +1,4 @@
 Project notes
 UI and unit conversion reviewed
+Code comments added for clarity (key sections)
 Final cleanup and submission prep
